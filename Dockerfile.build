@@ -4,6 +4,7 @@ ARG base
 FROM amazon/aws-sam-cli-build-image-${base}
 
 WORKDIR /tmp/src
+RUN yum install -y pth-devel
 ADD Gemfile Gemfile.lock ./
 RUN bundle --deployment
 ADD Rakefile versions.yaml ./

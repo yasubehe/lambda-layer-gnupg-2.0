@@ -107,14 +107,6 @@ PACKAGES = {
     uri: 'https://gnupg.org/ftp/gcrypt/libassuan/',
     pattern: /\Alibassuan-([\d.]+)\.tar\.bz2\z/,
   },
-  'ntbtls' => {
-    uri: 'https://gnupg.org/ftp/gcrypt/ntbtls/',
-    pattern: /\Antbtls-([\d.]+)\.tar\.bz2\z/,
-  },
-  'npth' => {
-    uri: 'https://gnupg.org/ftp/gcrypt/npth/',
-    pattern: /\Anpth-([\d.]+)\.tar\.bz2\z/,
-  },
 }
 
 task :watch do

@@ -11,7 +11,7 @@ VERSIONS = YAML.load_file(Pathname(__dir__) + 'versions.yaml')
 
 task :default => :package
 
-def_port('gnupg', VERSIONS.dig('gnupg', :version), depends: %i[libgpg-error libksba libassuan libgcrypt ntbtls npth]) do |r, deps|
+def_port('gnupg', VERSIONS.dig('gnupg', :version), depends: %i[libgpg-error libksba libassuan libgcrypt]) do |r, deps|
   rpath = deps.map {|dep| "#{dep.path}/lib" }.join(?:)
   ldflags = "-Wl,-rpath,#{rpath}"
 
@@ -35,16 +35,6 @@ def_port('libksba', VERSIONS.dig('libksba', :version), depends: %i[libgpg-error]
 end
 
 def_port('libassuan', VERSIONS.dig('libassuan', :version), depends: %i[libgpg-error]) do |r|
-  r.files << VERSIONS.fetch(r.name).slice(:url, :sha256)
-  r.configure_options = %W[--enable-shared --disable-static --with-pic --disable-doc]
-end
-
-def_port('ntbtls', VERSIONS.dig('ntbtls', :version), depends: %i[libgpg-error libgcrypt libksba]) do |r|
-  r.files << VERSIONS.fetch(r.name).slice(:url, :sha256)
-  r.configure_options = %W[--enable-shared --disable-static --with-pic --disable-doc]
-end
-
-def_port('npth', VERSIONS.dig('npth', :version)) do |r|
   r.files << VERSIONS.fetch(r.name).slice(:url, :sha256)
   r.configure_options = %W[--enable-shared --disable-static --with-pic --disable-doc]
 end
